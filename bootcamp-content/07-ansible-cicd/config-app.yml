@@ -36,7 +36,7 @@
 
     - name: Set AAP Creds
       ansible.builtin.set_fact:
-        aap_hostname: "{{ aap_pass['resources'][0]['spec']['host'] }}"
+        aap_hostname: "{{ aap_host['resources'][0]['spec']['host'] }}"
         aap_username: "{{ aap_username |default('admin') }}"
         aap_password: "{{ aap_pass['resources'][0]['data']['password'] | ansible.builtin.b64decode }}"
 
