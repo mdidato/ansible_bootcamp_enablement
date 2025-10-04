@@ -1,0 +1,4 @@
+aap_organizations:
+  - name: "bootcamp"
+    description: bootcamp organization"
+    max_hosts: 10
