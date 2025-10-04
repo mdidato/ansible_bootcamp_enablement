@@ -12,6 +12,8 @@
         validate_certs: false
       register: openshift_auth_results
 
+    - debug: var=openshift_auth_results
+
     - name: Get AAP Admin Cred
       kubernetes.core.k8s_info:
         api_version: v1
@@ -19,7 +21,7 @@
         name: aap-admin-password
         namespace: aap
         host: "{{ ocp_api }}"
-        api_key: "{{ openshift_auth_results[openshift_auth][api_key] }}"
+        api_key: "{{ openshift_auth_results.openshift_auth.api_key }}"
         validate_certs: false
       register: aap_pass
 
