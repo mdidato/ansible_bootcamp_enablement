@@ -38,7 +38,7 @@
       ansible.builtin.set_fact:
         aap_hostname: ffdsfsfdf
         aap_username: admin
-        aap_password: "{{ aap_pass['resources'][0]['data']['pasword'] | ansible.builtin.b64decode }}"
+        aap_password: "{{ aap_pass['resources'][0]['data']['password'] | ansible.builtin.b64decode }}"
 
 
 
