@@ -13,6 +13,7 @@
         host: "{{ ocp_api }}"
         username: "{{ ocp_username }}"
         password: "{{ ocp_password }}"
+        validate_certs: false
       register: aap_pass
 
     - name: Get AAP Gateway URL
@@ -24,6 +25,7 @@
         host: "{{ ocp_api }}"
         username: "{{ ocp_username }}"
         password: "{{ ocp_password }}"
+        validate_certs: false
       register: aap_host
 
   tasks:
