@@ -4,23 +4,21 @@
   connection: local
 
   pre_tasks:
-    - ansible.builtin.command:
-        cmd: ansible-galaxy collection list
-#    - name: Get AAP Admin Cred
-#      Kubernetes.core.k8s_info:
-#        api_version: v1
-#        kind: Secret
-#        name: aap-admin-password
-#        namespace: aap
-#      register: aap_pass
+    - name: Get AAP Admin Cred
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Secret
+        name: aap-admin-password
+        namespace: aap
+      register: aap_pass
 
-#    - name: Get AAP Gateway URL
-#      Kubernetes.core.k8s_info:
-#        api_version: v1
-#        kind: Route
-#        name: aap
-#        namespace: aap
-#      register: aap_host
+    - name: Get AAP Gateway URL
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Route
+        name: aap
+        namespace: aap
+      register: aap_host
 
   tasks:
     - name: Include vars from configs directory
