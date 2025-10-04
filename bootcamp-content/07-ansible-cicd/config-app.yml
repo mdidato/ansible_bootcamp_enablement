@@ -2,6 +2,7 @@
 - name: Playbook to configure ansible controller post installation
   hosts: localhost
   connection: local
+
   pre_tasks:
     - name: Get AAP Admin Cred
       Kubernetes.core.k8s_info:
