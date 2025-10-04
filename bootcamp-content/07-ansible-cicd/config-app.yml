@@ -1,0 +1,33 @@
+---
+- name: Playbook to configure ansible controller post installation
+  hosts: localhost
+  connection: local
+  pre_tasks:
+    - name: Get AAP Admin Cred
+      Kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Secret
+        name: aap-admin-password
+        namespace: aap
+      register: aap_pass
+
+    - name: Get AAP Gateway URL
+      Kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Route
+        name: aap
+        namespace: aap
+      register: aap_host
+
+  tasks:
+    - name: Include vars from configs directory
+      ansible.builtin.include_vars:
+        dir: "{{ aap_configs_dir | default((lookup('env', 'AAP_CONFIGS_DIR') == '') | ternary('./configs', lookup('env', 'AAP_CONFIGS_DIR'))) }}"
+        ignore_files: [controller_config.yml.template]
+        extensions: [yml]
+      tags:
+        - always
+
+    - name: Call dispatch role
+      ansible.builtin.include_role:
+        name: infra.aap_configuration.dispatch
