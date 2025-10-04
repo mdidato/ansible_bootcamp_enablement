@@ -4,6 +4,13 @@
   connection: local
 
   pre_tasks:
+    - name: Log in (obtain access token)
+      redhat.openshift.openshift_auth:
+        username: admin
+        password: "{{ ocp_password }}"
+        host: "{{ ocp_api }}"
+      register: openshift_auth_results
+
     - name: Get AAP Admin Cred
       kubernetes.core.k8s_info:
         api_version: v1
