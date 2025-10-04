@@ -10,6 +10,9 @@
         kind: Secret
         name: aap-admin-password
         namespace: aap
+        host: "{{ ocp_api }}"
+        username: "{{ ocp_username }}"
+        password: "{{ ocp_password }}"
       register: aap_pass
 
     - name: Get AAP Gateway URL
@@ -18,6 +21,9 @@
         kind: Route
         name: aap
         namespace: aap
+        host: "{{ ocp_api }}"
+        username: "{{ ocp_username }}"
+        password: "{{ ocp_password }}"
       register: aap_host
 
   tasks:
